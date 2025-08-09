@@ -1,0 +1,3 @@
+/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles/stereo_vo.dir
+/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles/edit_cache.dir
+/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles/rebuild_cache.dir
