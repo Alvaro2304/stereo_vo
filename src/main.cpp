@@ -3,68 +3,83 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include <opencv2/opencv.hpp>
 #include <opencv2/features2d.hpp>
 
 using namespace std;
 using namespace cv;
 
-// Read KITTI calib.txt (same as your earlier helper)
+// --- your existing readCalibration & readGroundTruth functions (unchanged) ---
 bool readCalibration(const string& calib_file, Mat& K, double& baseline) {
     ifstream file(calib_file);
-    if (!file.is_open()) {
-        cerr << "Cannot open calib file: " << calib_file << endl;
-        return false;
-    }
+    if (!file.is_open()) { cerr << "Cannot open calib file: " << calib_file << endl; return false; }
     string line;
     double P0[12] = {0}, P1[12] = {0};
     while (getline(file, line)) {
         stringstream ss(line);
-        string tag;
-        ss >> tag;
-        if (tag == "P0:") {
-            for (int i = 0; i < 12; ++i) ss >> P0[i];
-        } else if (tag == "P1:") {
-            for (int i = 0; i < 12; ++i) ss >> P1[i];
-        }
+        string tag; ss >> tag;
+        if (tag == "P0:") for (int i = 0; i < 12; ++i) ss >> P0[i];
+        else if (tag == "P1:") for (int i = 0; i < 12; ++i) ss >> P1[i];
     }
-    // intrinsics
     K = (Mat_<double>(3,3) << P0[0], P0[1], P0[2],
                                P0[4], P0[5], P0[6],
                                P0[8], P0[9], P0[10]);
-    // baseline estimate (KITTI P0 often has Tx=0, P1 has Tx)
-    double fx = P0[0];
-    double tx0 = P0[3];
-    double tx1 = P1[3];
-    baseline = (tx0 - tx1) / fx; // baseline positive
+    double fx = P0[0]; double tx0 = P0[3]; double tx1 = P1[3];
+    baseline = (tx0 - tx1) / fx;
     return true;
 }
 
-// Read KITTI ground truth poses
 bool readGroundTruth(const string& gt_file, vector<Mat>& poses) {
     ifstream file(gt_file);
-    if (!file.is_open()) {
-        cerr << "Cannot open ground truth file: " << gt_file << endl;
-        return false;
-    }
+    if (!file.is_open()) { cerr << "Cannot open ground truth file: " << gt_file << endl; return false; }
     string line;
     while (getline(file, line)) {
         stringstream ss(line);
-        Mat pose = Mat::eye(4, 4, CV_64F);
-        for (int r = 0; r < 3; r++)
-            for (int c = 0; c < 4; c++)
-                ss >> pose.at<double>(r, c);
+        Mat pose = Mat::eye(4,4,CV_64F);
+        for (int r=0;r<3;r++) for (int c=0;c<4;c++) ss >> pose.at<double>(r,c);
         poses.push_back(pose);
     }
     return !poses.empty();
 }
 
-int main(int argc, char** argv) {
-    if (argc < 2) {
-        cerr << "Usage: ./stereo_vo <sequence_number>" << endl;
-        return 1;
-    }
+// ----------------- BUCKETING HELPER -----------------
+vector<KeyPoint> bucketKeypoints(
+    const Mat &img,
+    Ptr<FastFeatureDetector> &fast,
+    int tile_h,
+    int tile_w,
+    int max_per_tile)
+{
+    vector<KeyPoint> kept;
+    const int H = img.rows, W = img.cols;
+    for (int y = 0; y < H; y += tile_h) {
+        for (int x = 0; x < W; x += tile_w) {
+            Rect roi(x, y, min(tile_w, W - x), min(tile_h, H - y));
+            Mat patch = img(roi);
 
+            vector<KeyPoint> kps_patch;
+            fast->detect(patch, kps_patch);
+
+            // adjust to image coords
+            for (auto &kp : kps_patch) kp.pt += Point2f((float)x, (float)y);
+
+            if ((int)kps_patch.size() > max_per_tile) {
+                // keep top responses
+                sort(kps_patch.begin(), kps_patch.end(),
+                     [](const KeyPoint &a, const KeyPoint &b){ return a.response > b.response; });
+                kps_patch.resize(max_per_tile);
+            }
+            // append
+            kept.insert(kept.end(), kps_patch.begin(), kps_patch.end());
+        }
+    }
+    return kept;
+}
+
+// ----------------- MAIN (integrated) -----------------
+int main(int argc, char** argv) {
+    if (argc < 2) { cerr << "Usage: ./stereo_vo <sequence_number>" << endl; return 1; }
     string seq = argv[1];
     string base = "../../kitti_dataset/data_odometry_gray/dataset/sequences/" + seq + "/";
     string left_dir = base + "image_0/";
@@ -83,9 +98,17 @@ int main(int argc, char** argv) {
     double fx = K.at<double>(0,0), fy = K.at<double>(1,1), cx = K.at<double>(0,2), cy = K.at<double>(1,2);
     cout << "K:\n" << K << "\nbaseline = " << baseline << endl;
 
-    // ORB + matcher
-    Ptr<ORB> orb = ORB::create(5000);
+    // ORB descriptor (we compute descriptors only for kept keypoints)
+    Ptr<ORB> orb = ORB::create(2000); // descriptor size config
     BFMatcher matcher(NORM_HAMMING, true);
+
+    // FAST detector for per-tile detection (fast)
+    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(20, true);
+
+    // bucketing params - tune as needed
+    const int TILE_H = 40;
+    const int TILE_W = 80;
+    const int MAX_PER_TILE = 10;
 
     // Trajectory visual
     Mat traj = Mat::zeros(800, 800, CV_8UC3);
@@ -101,35 +124,32 @@ int main(int argc, char** argv) {
     char buf[256];
     sprintf(buf, "%06d.png", 0);
     Mat prevL = load_gray(left_dir + buf), prevR = load_gray(right_dir + buf);
-    if (prevL.empty() || prevR.empty()) {
-        cerr << "Cannot read frame 0 images." << endl;
-        return -1;
-    }
+    if (prevL.empty() || prevR.empty()) { cerr << "Cannot read frame 0 images." << endl; return -1; }
 
-    vector<KeyPoint> prev_kpL, prev_kpR;
+    vector<KeyPoint> prev_kpL = bucketKeypoints(prevL, fast, TILE_H, TILE_W, MAX_PER_TILE);
+    vector<KeyPoint> prev_kpR = bucketKeypoints(prevR, fast, TILE_H, TILE_W, MAX_PER_TILE);
     Mat prev_descL, prev_descR;
-    orb->detectAndCompute(prevL, noArray(), prev_kpL, prev_descL);
-    orb->detectAndCompute(prevR, noArray(), prev_kpR, prev_descR);
+    if (!prev_kpL.empty()) orb->compute(prevL, prev_kpL, prev_descL);
+    if (!prev_kpR.empty()) orb->compute(prevR, prev_kpR, prev_descR);
 
-    // left->right matches for frame 0 to compute per-left-keypoint 3D
-    vector<DMatch> matches_lr0;
-    if (!prev_descL.empty() && !prev_descR.empty())
-        matcher.match(prev_descL, prev_descR, matches_lr0);
-
-    // compute prev_3d_per_kp (size = prev_kpL.size()), set z<=0 as invalid
+    // compute prev_3d_per_kp (size = prev_kpL.size()), set invalid z<=0
     vector<Point3f> prev_3d_per_kp(prev_kpL.size(), Point3f(0,0,-1));
-    vector<Point2f> ptsL_lr, ptsR_lr;
-    for (auto &m : matches_lr0) {
-        int iL = m.queryIdx, iR = m.trainIdx;
-        float xl = prev_kpL[iL].pt.x, yl = prev_kpL[iL].pt.y;
-        float xr = prev_kpR[iR].pt.x;
-        float disparity = xl - xr;
-        if (disparity <= 0) continue;
-        double Z = fx * baseline / disparity;
-        if (!isfinite(Z) || Z <= 0) continue;
-        double X = (xl - cx) * Z / fx;
-        double Y = (yl - cy) * Z / fy;
-        prev_3d_per_kp[iL] = Point3f((float)X, (float)Y, (float)Z);
+    if (!prev_descL.empty() && !prev_descR.empty()) {
+        vector<DMatch> matches_lr0;
+        matcher.match(prev_descL, prev_descR, matches_lr0);
+        for (auto &m : matches_lr0) {
+            int iL = m.queryIdx, iR = m.trainIdx;
+            if (iL < 0 || iL >= (int)prev_kpL.size() || iR < 0 || iR >= (int)prev_kpR.size()) continue;
+            float xl = prev_kpL[iL].pt.x, yl = prev_kpL[iL].pt.y;
+            float xr = prev_kpR[iR].pt.x;
+            float disparity = xl - xr;
+            if (disparity <= 0) continue;
+            double Z = fx * baseline / disparity;
+            if (!isfinite(Z) || Z <= 0) continue;
+            double X = (xl - cx) * Z / fx;
+            double Y = (yl - cy) * Z / fy;
+            prev_3d_per_kp[iL] = Point3f((float)X, (float)Y, (float)Z);
+        }
     }
 
     // ----- LOOP frames from 1..N-1 -----
@@ -142,16 +162,16 @@ int main(int argc, char** argv) {
         Mat curL = load_gray(left_dir + buf), curR = load_gray(right_dir + buf);
         if (curL.empty() || curR.empty()) break;
 
-        // detect descriptors current
-        vector<KeyPoint> cur_kpL, cur_kpR;
+        // ===== bucketed detection & ORB descriptor compute for cur frame =====
+        vector<KeyPoint> cur_kpL = bucketKeypoints(curL, fast, TILE_H, TILE_W, MAX_PER_TILE);
+        vector<KeyPoint> cur_kpR = bucketKeypoints(curR, fast, TILE_H, TILE_W, MAX_PER_TILE);
         Mat cur_descL, cur_descR;
-        orb->detectAndCompute(curL, noArray(), cur_kpL, cur_descL);
-        orb->detectAndCompute(curR, noArray(), cur_kpR, cur_descR);
+        if (!cur_kpL.empty()) orb->compute(curL, cur_kpL, cur_descL);
+        if (!cur_kpR.empty()) orb->compute(curR, cur_kpR, cur_descR);
 
         // match previous-left -> current-left (temporal)
         vector<DMatch> matches_prev_curr;
-        if (!prev_descL.empty() && !cur_descL.empty())
-            matcher.match(prev_descL, cur_descL, matches_prev_curr);
+        if (!prev_descL.empty() && !cur_descL.empty()) matcher.match(prev_descL, cur_descL, matches_prev_curr);
 
         // build 3D-2D correspondences: 3D from prev_3d_per_kp, 2D = cur keypoints
         vector<Point3f> objPoints;
@@ -185,19 +205,14 @@ int main(int argc, char** argv) {
                 T.at<double>(1,3) = tvec.at<double>(1);
                 T.at<double>(2,3) = tvec.at<double>(2);
 
-                // T maps points from prev -> cur (X_cur = R*X_prev + t)
-                // update global pose: curr_pose = curr_pose * T
+                // update global pose
                 curr_pose = curr_pose * T;
-            } else {
-                // solvePnP failed; skip update
             }
-        } else {
-            // not enough correspondences
         }
 
-        // draw trajectories
+        // draw trajectories (same as you had)
         int px = int(curr_pose.at<double>(0,3) * traj_scale) + origin_x;
-        int py = int(curr_pose.at<double>(2,3) * traj_scale * -1) + origin_y;
+        int py = int(-curr_pose.at<double>(2,3) * traj_scale) + origin_y; // neg Z for display if needed
         circle(traj, Point(px, py), 2, Scalar(0,0,255), -1);
 
         if (!gt_poses.empty() && frame < (int)gt_poses.size()) {
@@ -212,20 +227,17 @@ int main(int argc, char** argv) {
         if (waitKey(1) == 27) break;
 
         // prepare prev_* for next iteration:
-        prevL = curL.clone();
-        prevR = curR.clone();
-        prev_kpL = cur_kpL;
-        prev_kpR = cur_kpR;
-        prev_descL = cur_descL.clone();
-        prev_descR = cur_descR.clone();
+        prevL = curL.clone(); prevR = curR.clone();
+        prev_kpL = cur_kpL; prev_kpR = cur_kpR;
+        prev_descL = cur_descL.clone(); prev_descR = cur_descR.clone();
 
-        // recompute prev_3d_per_kp for the (now) prev frame (i.e. the current frame we just processed)
-        // use left<->right matches of this frame
+        // recompute prev_3d_per_kp for the (now) prev frame using left<->right matches
         vector<DMatch> matches_lr;
         if (!prev_descL.empty() && !prev_descR.empty()) matcher.match(prev_descL, prev_descR, matches_lr);
         prev_3d_per_kp.assign(prev_kpL.size(), Point3f(0,0,-1));
         for (auto &m : matches_lr) {
             int iL = m.queryIdx, iR = m.trainIdx;
+            if (iL < 0 || iL >= (int)prev_kpL.size() || iR < 0 || iR >= (int)prev_kpR.size()) continue;
             float xl = prev_kpL[iL].pt.x, yl = prev_kpL[iL].pt.y;
             float xr = prev_kpR[iR].pt.x;
             float disparity = xl - xr;
