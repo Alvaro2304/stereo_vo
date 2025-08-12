@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_utils.cpp" "CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o" "gcc" "CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o.d"
+  "/home/alvaro/studying/visual_odometry/kitti/stereo/src/calibration.cpp" "CMakeFiles/stereo_vo.dir/src/calibration.cpp.o" "gcc" "CMakeFiles/stereo_vo.dir/src/calibration.cpp.o.d"
+  "/home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_bucket.cpp" "CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o" "gcc" "CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o.d"
   "/home/alvaro/studying/visual_odometry/kitti/stereo/src/main.cpp" "CMakeFiles/stereo_vo.dir/src/main.cpp.o" "gcc" "CMakeFiles/stereo_vo.dir/src/main.cpp.o.d"
   )
 

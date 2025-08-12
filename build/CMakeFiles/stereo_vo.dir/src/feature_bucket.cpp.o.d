@@ -1,7 +1,7 @@
-CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o: \
- /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_utils.cpp \
+CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o: \
+ /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_bucket.cpp \
  /usr/include/stdc-predef.h \
- /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_utils.h \
+ /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_bucket.h \
  /usr/include/opencv4/opencv2/opencv.hpp \
  /usr/include/opencv4/opencv2/opencv_modules.hpp \
  /usr/include/opencv4/opencv2/core.hpp \

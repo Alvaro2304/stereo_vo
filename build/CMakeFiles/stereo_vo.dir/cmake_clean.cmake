@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o"
-  "CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o.d"
+  "CMakeFiles/stereo_vo.dir/src/calibration.cpp.o"
+  "CMakeFiles/stereo_vo.dir/src/calibration.cpp.o.d"
+  "CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o"
+  "CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o.d"
   "CMakeFiles/stereo_vo.dir/src/main.cpp.o"
   "CMakeFiles/stereo_vo.dir/src/main.cpp.o.d"
   "stereo_vo"

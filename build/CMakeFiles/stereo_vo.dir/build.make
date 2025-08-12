@@ -83,30 +83,46 @@ CMakeFiles/stereo_vo.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stereo_vo.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/studying/visual_odometry/kitti/stereo/src/main.cpp -o CMakeFiles/stereo_vo.dir/src/main.cpp.s
 
-CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o: CMakeFiles/stereo_vo.dir/flags.make
-CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o: ../src/feature_utils.cpp
-CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o: CMakeFiles/stereo_vo.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o -MF CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o.d -o CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o -c /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_utils.cpp
+CMakeFiles/stereo_vo.dir/src/calibration.cpp.o: CMakeFiles/stereo_vo.dir/flags.make
+CMakeFiles/stereo_vo.dir/src/calibration.cpp.o: ../src/calibration.cpp
+CMakeFiles/stereo_vo.dir/src/calibration.cpp.o: CMakeFiles/stereo_vo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/stereo_vo.dir/src/calibration.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/stereo_vo.dir/src/calibration.cpp.o -MF CMakeFiles/stereo_vo.dir/src/calibration.cpp.o.d -o CMakeFiles/stereo_vo.dir/src/calibration.cpp.o -c /home/alvaro/studying/visual_odometry/kitti/stereo/src/calibration.cpp
 
-CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_utils.cpp > CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.i
+CMakeFiles/stereo_vo.dir/src/calibration.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stereo_vo.dir/src/calibration.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/studying/visual_odometry/kitti/stereo/src/calibration.cpp > CMakeFiles/stereo_vo.dir/src/calibration.cpp.i
 
-CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_utils.cpp -o CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.s
+CMakeFiles/stereo_vo.dir/src/calibration.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stereo_vo.dir/src/calibration.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/studying/visual_odometry/kitti/stereo/src/calibration.cpp -o CMakeFiles/stereo_vo.dir/src/calibration.cpp.s
+
+CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o: CMakeFiles/stereo_vo.dir/flags.make
+CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o: ../src/feature_bucket.cpp
+CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o: CMakeFiles/stereo_vo.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o -MF CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o.d -o CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o -c /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_bucket.cpp
+
+CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_bucket.cpp > CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.i
+
+CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alvaro/studying/visual_odometry/kitti/stereo/src/feature_bucket.cpp -o CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.s
 
 # Object files for target stereo_vo
 stereo_vo_OBJECTS = \
 "CMakeFiles/stereo_vo.dir/src/main.cpp.o" \
-"CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o"
+"CMakeFiles/stereo_vo.dir/src/calibration.cpp.o" \
+"CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o"
 
 # External object files for target stereo_vo
 stereo_vo_EXTERNAL_OBJECTS =
 
 stereo_vo: CMakeFiles/stereo_vo.dir/src/main.cpp.o
-stereo_vo: CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o
+stereo_vo: CMakeFiles/stereo_vo.dir/src/calibration.cpp.o
+stereo_vo: CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o
 stereo_vo: CMakeFiles/stereo_vo.dir/build.make
 stereo_vo: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.4.5.4d
 stereo_vo: /usr/lib/x86_64-linux-gnu/libopencv_alphamat.so.4.5.4d
@@ -163,7 +179,7 @@ stereo_vo: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.4.5.4d
 stereo_vo: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.4.5.4d
 stereo_vo: /usr/lib/x86_64-linux-gnu/libopencv_core.so.4.5.4d
 stereo_vo: CMakeFiles/stereo_vo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable stereo_vo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alvaro/studying/visual_odometry/kitti/stereo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable stereo_vo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/stereo_vo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

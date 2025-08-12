@@ -129,29 +129,53 @@ stereo_vo/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/build
 .PHONY : stereo_vo/fast
 
-src/feature_utils.o: src/feature_utils.cpp.o
-.PHONY : src/feature_utils.o
+src/calibration.o: src/calibration.cpp.o
+.PHONY : src/calibration.o
 
 # target to build an object file
-src/feature_utils.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.o
-.PHONY : src/feature_utils.cpp.o
+src/calibration.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/calibration.cpp.o
+.PHONY : src/calibration.cpp.o
 
-src/feature_utils.i: src/feature_utils.cpp.i
-.PHONY : src/feature_utils.i
+src/calibration.i: src/calibration.cpp.i
+.PHONY : src/calibration.i
 
 # target to preprocess a source file
-src/feature_utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.i
-.PHONY : src/feature_utils.cpp.i
+src/calibration.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/calibration.cpp.i
+.PHONY : src/calibration.cpp.i
 
-src/feature_utils.s: src/feature_utils.cpp.s
-.PHONY : src/feature_utils.s
+src/calibration.s: src/calibration.cpp.s
+.PHONY : src/calibration.s
 
 # target to generate assembly for a file
-src/feature_utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/feature_utils.cpp.s
-.PHONY : src/feature_utils.cpp.s
+src/calibration.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/calibration.cpp.s
+.PHONY : src/calibration.cpp.s
+
+src/feature_bucket.o: src/feature_bucket.cpp.o
+.PHONY : src/feature_bucket.o
+
+# target to build an object file
+src/feature_bucket.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.o
+.PHONY : src/feature_bucket.cpp.o
+
+src/feature_bucket.i: src/feature_bucket.cpp.i
+.PHONY : src/feature_bucket.i
+
+# target to preprocess a source file
+src/feature_bucket.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.i
+.PHONY : src/feature_bucket.cpp.i
+
+src/feature_bucket.s: src/feature_bucket.cpp.s
+.PHONY : src/feature_bucket.s
+
+# target to generate assembly for a file
+src/feature_bucket.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stereo_vo.dir/build.make CMakeFiles/stereo_vo.dir/src/feature_bucket.cpp.s
+.PHONY : src/feature_bucket.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -186,9 +210,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... stereo_vo"
-	@echo "... src/feature_utils.o"
-	@echo "... src/feature_utils.i"
-	@echo "... src/feature_utils.s"
+	@echo "... src/calibration.o"
+	@echo "... src/calibration.i"
+	@echo "... src/calibration.s"
+	@echo "... src/feature_bucket.o"
+	@echo "... src/feature_bucket.i"
+	@echo "... src/feature_bucket.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
