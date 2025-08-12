@@ -6,78 +6,12 @@
 #include <algorithm>
 #include <opencv2/opencv.hpp>
 #include <opencv2/features2d.hpp>
+#include "calibration.h"
+#include "feature_bucket.h"
 
 using namespace std;
 using namespace cv;
 
-// --- your existing readCalibration & readGroundTruth functions (unchanged) ---
-bool readCalibration(const string& calib_file, Mat& K, double& baseline) {
-    ifstream file(calib_file);
-    if (!file.is_open()) { cerr << "Cannot open calib file: " << calib_file << endl; return false; }
-    string line;
-    double P0[12] = {0}, P1[12] = {0};
-    while (getline(file, line)) {
-        stringstream ss(line);
-        string tag; ss >> tag;
-        if (tag == "P0:") for (int i = 0; i < 12; ++i) ss >> P0[i];
-        else if (tag == "P1:") for (int i = 0; i < 12; ++i) ss >> P1[i];
-    }
-    K = (Mat_<double>(3,3) << P0[0], P0[1], P0[2],
-                               P0[4], P0[5], P0[6],
-                               P0[8], P0[9], P0[10]);
-    double fx = P0[0]; double tx0 = P0[3]; double tx1 = P1[3];
-    baseline = (tx0 - tx1) / fx;
-    return true;
-}
-
-bool readGroundTruth(const string& gt_file, vector<Mat>& poses) {
-    ifstream file(gt_file);
-    if (!file.is_open()) { cerr << "Cannot open ground truth file: " << gt_file << endl; return false; }
-    string line;
-    while (getline(file, line)) {
-        stringstream ss(line);
-        Mat pose = Mat::eye(4,4,CV_64F);
-        for (int r=0;r<3;r++) for (int c=0;c<4;c++) ss >> pose.at<double>(r,c);
-        poses.push_back(pose);
-    }
-    return !poses.empty();
-}
-
-// ----------------- BUCKETING HELPER -----------------
-vector<KeyPoint> bucketKeypoints(
-    const Mat &img,
-    Ptr<FastFeatureDetector> &fast,
-    int tile_h,
-    int tile_w,
-    int max_per_tile)
-{
-    vector<KeyPoint> kept;
-    const int H = img.rows, W = img.cols;
-    for (int y = 0; y < H; y += tile_h) {
-        for (int x = 0; x < W; x += tile_w) {
-            Rect roi(x, y, min(tile_w, W - x), min(tile_h, H - y));
-            Mat patch = img(roi);
-
-            vector<KeyPoint> kps_patch;
-            fast->detect(patch, kps_patch);
-
-            // adjust to image coords
-            for (auto &kp : kps_patch) kp.pt += Point2f((float)x, (float)y);
-
-            if ((int)kps_patch.size() > max_per_tile) {
-                // keep top responses
-                sort(kps_patch.begin(), kps_patch.end(),
-                     [](const KeyPoint &a, const KeyPoint &b){ return a.response > b.response; });
-                kps_patch.resize(max_per_tile);
-            }
-            // append
-            kept.insert(kept.end(), kps_patch.begin(), kps_patch.end());
-        }
-    }
-    return kept;
-}
-
-// ----------------- MAIN (integrated) -----------------
 int main(int argc, char** argv) {
     if (argc < 2) { cerr << "Usage: ./stereo_vo <sequence_number>" << endl; return 1; }
     string seq = argv[1];
@@ -99,20 +33,20 @@ int main(int argc, char** argv) {
     cout << "K:\n" << K << "\nbaseline = " << baseline << endl;
 
     // ORB descriptor (we compute descriptors only for kept keypoints)
-    Ptr<ORB> orb = ORB::create(2000); // descriptor size config
+    Ptr<ORB> orb = ORB::create(3000); // descriptor size config
     BFMatcher matcher(NORM_HAMMING, true);
 
     // FAST detector for per-tile detection (fast)
-    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(20, true);
+    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(3, true);
 
     // bucketing params - tune as needed
-    const int TILE_H = 40;
-    const int TILE_W = 80;
-    const int MAX_PER_TILE = 10;
+    const int TILE_H = 10; //20
+    const int TILE_W = 20; //40
+    const int MAX_PER_TILE = 15;  //15
 
     // Trajectory visual
     Mat traj = Mat::zeros(800, 800, CV_8UC3);
-    double traj_scale = 0.5;
+    double traj_scale = 0.2;
     int origin_x = traj.cols/2, origin_y = traj.rows/4;
 
     // initialize curr_pose with first GT pose if available, else identity
@@ -210,16 +144,16 @@ int main(int argc, char** argv) {
             }
         }
 
-        // draw trajectories (same as you had)
+        // draw trajectories
         int px = int(curr_pose.at<double>(0,3) * traj_scale) + origin_x;
-        int py = int(-curr_pose.at<double>(2,3) * traj_scale) + origin_y; // neg Z for display if needed
-        circle(traj, Point(px, py), 2, Scalar(0,0,255), -1);
+        int py = int(-curr_pose.at<double>(2,3) * traj_scale) + origin_y; // for kitti, neg Y for display
+        circle(traj, Point(px, py), 2, Scalar(0,255,0), -1);
 
         if (!gt_poses.empty() && frame < (int)gt_poses.size()) {
             Mat GT = gt_poses[frame];
             int gx = int(GT.at<double>(0,3) * traj_scale) + origin_x;
             int gy = int(GT.at<double>(2,3) * traj_scale) + origin_y;
-            circle(traj, Point(gx, gy), 2, Scalar(255,0,0), -1);
+            circle(traj, Point(gx, gy), 2, Scalar(0,0,255), -1);
         }
 
         imshow("Trajectory", traj);
