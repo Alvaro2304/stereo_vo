@@ -1,4 +1,3 @@
-// klt_stereo_vo.cpp  (replace your main implementation with this)
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -49,7 +48,7 @@ int main(int argc, char** argv) {
 
     // Trajectory visual
     Mat traj = Mat::zeros(800, 800, CV_8UC3);
-    double traj_scale = 0.1;
+    double traj_scale = 0.5;
     int origin_x = traj.cols/2, origin_y = traj.rows/4;
 
     // initialize curr_pose with first GT pose if available, else identity
