@@ -37,16 +37,16 @@ int main(int argc, char** argv) {
     BFMatcher matcher(NORM_HAMMING, true);
 
     // FAST detector for per-tile detection (fast)
-    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(3, true);
+    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(10, true);
 
     // bucketing params - tune as needed
-    const int TILE_H = 10; //20
-    const int TILE_W = 20; //40
-    const int MAX_PER_TILE = 15;  //15
+    const int TILE_H = 20; //20
+    const int TILE_W = 40; //40
+    const int MAX_PER_TILE = 10;  //15
 
     // Trajectory visual
     Mat traj = Mat::zeros(800, 800, CV_8UC3);
-    double traj_scale = 0.2;
+    double traj_scale = 0.5;
     int origin_x = traj.cols/2, origin_y = traj.rows/4;
 
     // initialize curr_pose with first GT pose if available, else identity
@@ -129,7 +129,7 @@ int main(int argc, char** argv) {
             Mat rvec, tvec, inliers;
             Mat Kmat = (Mat_<double>(3,3) << fx, 0, cx, 0, fy, cy, 0, 0, 1);
             bool ok = solvePnPRansac(objPoints, imgPoints, Kmat, noArray(),
-                                     rvec, tvec, false, 100, 8.0, 0.99, inliers, SOLVEPNP_ITERATIVE);
+                                     rvec, tvec, false, 100, 3.0, 0.99, inliers, SOLVEPNP_ITERATIVE);
             if (ok) {
                 Mat R;
                 Rodrigues(rvec, R);
