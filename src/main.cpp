@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     cout << "K:\n" << K << "\nbaseline = " << baseline << endl;
 
     // FAST detector for per-tile detection (fast)
-    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(20, true);
+    Ptr<FastFeatureDetector> fast = FastFeatureDetector::create(10, true);
 
     // bucketing params - tune as needed
     const int TILE_H = 20;
@@ -133,11 +133,11 @@ int main(int argc, char** argv) {
         }
 
         // run solvePnP if enough correspondences
-        if (objPoints.size() >= 6) {
+        if (objPoints.size() >= 50) {
             Mat rvec, tvec, inliers;
             Mat Kmat = (Mat_<double>(3,3) << fx, 0, cx, 0, fy, cy, 0, 0, 1);
             bool ok = solvePnPRansac(objPoints, imgPoints, Kmat, noArray(),
-                                     rvec, tvec, false, 100, 2.0, 0.99, inliers, SOLVEPNP_ITERATIVE);
+                                     rvec, tvec, false, 100, 1.0, 0.99, inliers, SOLVEPNP_ITERATIVE);
             if (ok) {
                 Mat R;
                 Rodrigues(rvec, R);
