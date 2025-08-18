@@ -1,0 +1,129 @@
+﻿2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@18] **********************************************
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@19]  OrbbecViewer launched! Welcome!! 
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@20]  	- Version: V1.10.18
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@21]  	- Author: 
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@22]  	- E-Mail: 
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@23]  	- Company: orbbec
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@24]  	- Website: http://www.orbbec.com.cn/
+2025-08-15 17:55:00.453 INFO  [416788] [loggerInit@25] **********************************************
+2025-08-15 17:55:01.680 ERROR [416788] [OBDeviceExt::OBDeviceExt@40] Device is disconnect!
+2025-08-15 17:55:01.692 ERROR [416788] [D2CPipeline::setSync@1234] enable frame sync failed!
+2025-08-15 17:55:03.692 INFO  [416815] [PropertyManager::syncProperty@441] sync property: 0@Flash write protection -> 1, range: 0 - 1, default: 1
+2025-08-15 17:55:03.693 ERROR [416815] [PropertyManager::syncProperty@487] init property failed: 3@Laser emitter enable, Request failed, device response with unknown error!
+2025-08-15 17:55:03.694 INFO  [416815] [PropertyManager::syncProperty@441] sync property: 14@Mirror Depth Stream -> 0, range: 0 - 1, default: 1
+2025-08-15 17:55:03.694 INFO  [416815] [PropertyManager::syncProperty@441] sync property: 17@HoleFilter -> 1, range: 0 - 1, default: 1
+2025-08-15 17:55:03.694 INFO  [416815] [PropertyManager::syncProperty@441] sync property: 18@IR Mirror -> 0, range: 0 - 1, default: 0
+2025-08-15 17:55:03.694 INFO  [416815] [PropertyManager::syncProperty@448] sync property: 22@Depth threshold min -> 0, range: 0 - 15000, default: 0
+2025-08-15 17:55:03.694 INFO  [416815] [PropertyManager::syncProperty@448] sync property: 23@Depth threshold max -> 10000, range: 0 - 15000, default: 10000
+2025-08-15 17:55:03.695 INFO  [416815] [PropertyManager::syncProperty@441] sync property: 24@Depth soft filter -> 1, range: 0 - 1, default: 1
+2025-08-15 17:55:03.695 INFO  [416815] [PropertyManager::syncProperty@448] sync property: 40@Max Diff -> 16, range: 1 - 10000, default: 16
+2025-08-15 17:55:03.695 INFO  [416815] [PropertyManager::syncProperty@448] sync property: 41@Max Speckle Size -> 480, range: 1 - 1000, default: 480
+2025-08-15 17:55:03.695 INFO  [416815] [PropertyManager::syncProperty@441] sync property: 42@Hardware D2C -> 0, range: 0 - 1, default: 1
+2025-08-15 17:55:03.696 INFO  [416815] [PropertyManager::syncProperty@448] sync property: 75@Depth Precision Level -> 0, range: 0 - 6, default: 0
+2025-08-15 17:55:03.696 INFO  [416827] [PropertyManager::syncProperty@441] sync property: 14@Mirror Depth Stream -> 0, range: 0 - 1, default: 1
+2025-08-15 17:55:03.696 INFO  [416817] [PropertyManager::syncProperty@441] sync property: 18@IR Mirror -> 0, range: 0 - 1, default: 0
+2025-08-15 17:55:03.697 INFO  [416817] [PropertyManager::syncProperty@448] sync property: 2026@IR Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:03.697 INFO  [416817] [PropertyManager::syncProperty@448] sync property: 2027@IR Sensor Gain -> 1000, range: 0 - 9999, default: 1000
+2025-08-15 17:55:03.700 INFO  [416817] [PropertyManager::write@517] write property: 2026@IR Sensor Exposure -> 3000
+2025-08-15 17:55:03.700 INFO  [416817] [PropertyManager::read@565] read property: 2026@IR Sensor Exposure -> 3000
+2025-08-15 17:55:03.701 INFO  [416817] [PropertyManager::syncProperty@448] sync property: 2026@IR Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:03.701 INFO  [416817] [PropertyManager::read@565] read property: 2026@IR Sensor Exposure -> 3000
+2025-08-15 17:55:03.702 INFO  [416817] [PropertyManager::syncProperty@448] sync property: 2026@IR Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:03.702 INFO  [416817] [PropertyManager::read@565] read property: 2027@IR Sensor Gain -> 1000
+2025-08-15 17:55:03.703 INFO  [416817] [PropertyManager::syncProperty@448] sync property: 2027@IR Sensor Gain -> 1000, range: 0 - 9999, default: 1000
+2025-08-15 17:55:03.703 INFO  [416817] [OBSensorExt::syncPropertiesFunc@1122] OBSensorExt sync all properties finish.
+2025-08-15 17:55:03.703 INFO  [416827] [PropertyManager::syncProperty@448] sync property: 2017@Depth Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:03.704 INFO  [416827] [PropertyManager::syncProperty@448] sync property: 2018@Depth Sensor Gain -> 1000, range: 0 - 9999, default: 1000
+2025-08-15 17:55:03.706 INFO  [416827] [PropertyManager::write@517] write property: 2017@Depth Sensor Exposure -> 3000
+2025-08-15 17:55:03.706 INFO  [416827] [PropertyManager::read@565] read property: 2017@Depth Sensor Exposure -> 3000
+2025-08-15 17:55:03.707 INFO  [416827] [PropertyManager::syncProperty@448] sync property: 2017@Depth Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:03.707 INFO  [416827] [PropertyManager::read@565] read property: 2017@Depth Sensor Exposure -> 3000
+2025-08-15 17:55:03.708 INFO  [416827] [PropertyManager::syncProperty@448] sync property: 2017@Depth Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:03.708 INFO  [416827] [PropertyManager::read@565] read property: 2018@Depth Sensor Gain -> 1000
+2025-08-15 17:55:03.708 INFO  [416827] [PropertyManager::syncProperty@448] sync property: 2018@Depth Sensor Gain -> 1000, range: 0 - 9999, default: 1000
+2025-08-15 17:55:03.708 INFO  [416827] [OBSensorExt::syncPropertiesFunc@1122] OBSensorExt sync all properties finish.
+2025-08-15 17:55:03.710 INFO  [416819] [PropertyManager::syncProperty@441] sync property: 2000@Color Sensor Auto Exposure -> 1, range: 0 - 1, default: 1
+2025-08-15 17:55:03.711 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2001@Color Sensor Exposure -> 157, range: 1 - 5000, default: 157
+2025-08-15 17:55:03.713 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2002@Color Sensor Gain -> 0, range: 0 - 100, default: 0
+2025-08-15 17:55:03.714 INFO  [416819] [PropertyManager::syncProperty@441] sync property: 2003@Auto White Balance -> 1, range: 0 - 1, default: 1
+2025-08-15 17:55:03.716 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2004@UVC image white balance setting -> 4600, range: 2800 - 6500, default: 4600
+2025-08-15 17:55:03.717 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2005@UVC image brightness -> 0, range: -64 - 64, default: 0
+2025-08-15 17:55:03.719 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2006@UVC image sharpness setting -> 1, range: 0 - 6, default: 1
+2025-08-15 17:55:03.721 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2008@UVC image saturation setting -> 64, range: 0 - 128, default: 64
+2025-08-15 17:55:03.722 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2009@UVC image contrast setting -> 32, range: 0 - 64, default: 32
+2025-08-15 17:55:03.724 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2010@UVC image gamma setting -> 100, range: 72 - 500, default: 100
+2025-08-15 17:55:03.724 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2012@Auto Exposure Priority -> 1, range: 0 - 1, default: 0
+2025-08-15 17:55:03.726 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2013@Backlight Compensation -> 0, range: 0 - 65535, default: 0
+2025-08-15 17:55:03.728 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2014@UVC image Hue setting -> 0, range: -40 - 40, default: 0
+2025-08-15 17:55:03.729 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2015@Power Line Frequency -> 1, range: 0 - 2, default: 1
+2025-08-15 17:55:03.729 INFO  [416819] [PropertyManager::read@565] read property: 2001@Color Sensor Exposure -> 157
+2025-08-15 17:55:03.731 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2001@Color Sensor Exposure -> 157, range: 1 - 5000, default: 157
+2025-08-15 17:55:03.731 INFO  [416819] [PropertyManager::read@565] read property: 2005@UVC image brightness -> 0
+2025-08-15 17:55:03.733 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2005@UVC image brightness -> 0, range: -64 - 64, default: 0
+2025-08-15 17:55:03.733 INFO  [416819] [PropertyManager::read@565] read property: 2002@Color Sensor Gain -> 0
+2025-08-15 17:55:03.735 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2002@Color Sensor Gain -> 0, range: 0 - 100, default: 0
+2025-08-15 17:55:03.735 INFO  [416819] [PropertyManager::read@565] read property: 2004@UVC image white balance setting -> 4600
+2025-08-15 17:55:03.737 INFO  [416819] [PropertyManager::syncProperty@448] sync property: 2004@UVC image white balance setting -> 4600, range: 2800 - 6500, default: 4600
+2025-08-15 17:55:03.737 INFO  [416819] [OBSensorExt::syncPropertiesFunc@1122] OBSensorExt sync all properties finish.
+2025-08-15 17:55:03.737 INFO  [416815] [OBDeviceExt::OBDeviceExt@123] OBDeviceExt sync all properties finish.
+2025-08-15 17:55:05.507 INFO  [416788] [OBSensorExt::startStream@846] startStream@Depth, witdh=640, height=400, fps=30, format=Y11
+2025-08-15 17:55:05.555 INFO  [416863] [OBSensorExt::newFrameCallback@61] First frame of Depth received: timestamp=1755298505548, systemTimestamp=1755298505548
+2025-08-15 17:55:05.708 INFO  [416788] [PropertyManager::read@565] read property: 40@Max Diff -> 16
+2025-08-15 17:55:05.708 INFO  [416788] [PropertyManager::read@565] read property: 41@Max Speckle Size -> 480
+2025-08-15 17:55:05.708 ERROR [416788] [PropertyManager::read@604] write property failed: 3@Laser emitter enable, getBoolProperty, exceptionType: 6, message: Request failed, device response with unknown error!
+2025-08-15 17:55:05.708 INFO  [416788] [PropertyManager::read@565] read property: 2017@Depth Sensor Exposure -> 3000
+2025-08-15 17:55:05.709 INFO  [416788] [PropertyManager::syncProperty@448] sync property: 2017@Depth Sensor Exposure -> 3000, range: 0 - 10000, default: 3000
+2025-08-15 17:55:05.719 INFO  [416788] [ImageSensorMonitorWidget::drawContent@173] Depth create texture id:17
+2025-08-15 17:55:36.120 INFO  [416788] [OBSensorExt::stopStream@870] stopStream@Depth
+2025-08-15 17:55:36.333 INFO  [416788] [PropertyManager::read@565] read property: 40@Max Diff -> 16
+2025-08-15 17:55:36.333 INFO  [416788] [PropertyManager::read@565] read property: 41@Max Speckle Size -> 480
+2025-08-15 17:55:36.333 ERROR [416788] [PropertyManager::read@604] write property failed: 3@Laser emitter enable, getBoolProperty, exceptionType: 6, message: Request failed, device response with unknown error!
+2025-08-15 17:55:37.264 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 31.3418
+2025-08-15 17:55:38.287 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:39.309 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:40.331 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:41.355 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3624
+2025-08-15 17:55:42.376 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:43.400 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:44.422 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:45.444 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:55:46.467 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:47.489 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:48.513 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:49.535 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3624
+2025-08-15 17:55:50.556 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:51.580 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:52.602 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:53.625 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:55:54.647 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:55.669 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:56.693 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3624
+2025-08-15 17:55:57.715 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:55:58.738 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:55:59.760 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:00.782 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:56:01.805 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:02.827 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:03.851 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:56:04.873 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:05.894 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:56:06.918 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:07.940 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:08.964 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:56:09.985 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:11.007 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:56:12.031 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:13.053 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3624
+2025-08-15 17:56:14.076 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:56:15.098 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:16.120 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:56:17.144 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:18.165 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:19.189 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.2734
+2025-08-15 17:56:20.211 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:21.233 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.303
+2025-08-15 17:56:22.256 DEBUG [416965] [D2CPipeline::frameGrabFunc@649]  fps too low. curStreamProfile fps: 60, caculate fps: 30.3327
+2025-08-15 17:56:22.399 DEBUG [417136] [OBSensorServer::OBSensorServer@71] device removed:SL1000S_U3-uid:1-1.2-16
+2025-08-15 17:56:22.791 INFO  [416788] [PropertyManager::read@565] read property: 40@Max Diff -> 16
+2025-08-15 17:56:22.791 INFO  [416788] [PropertyManager::read@565] read property: 41@Max Speckle Size -> 480
+2025-08-15 17:56:22.792 ERROR [416788] [PropertyManager::read@604] write property failed: 3@Laser emitter enable, getBoolProperty, exceptionType: 6, message: Request failed, statusCode: 2, msg: send control transfer failed!

@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
         }
 
         // run solvePnP if enough correspondences
-        if (objPoints.size() >= 6) {
+        if (objPoints.size() >= 30) {
             Mat rvec, tvec, inliers;
             Mat Kmat = (Mat_<double>(3,3) << fx, 0, cx, 0, fy, cy, 0, 0, 1);
             bool ok = solvePnPRansac(objPoints, imgPoints, Kmat, noArray(),
